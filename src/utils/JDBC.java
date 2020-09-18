@@ -14,7 +14,7 @@ public class JDBC {
     //資料庫的帳號和密碼
     private static final String user = "db01";
     private static final String password = "aa123456AA";
-//
+    private static Connection conn = null;  //資料庫連線物件，採用單例模式
 //    static{
 //        try {
 //            Class.forName(driver);
@@ -34,7 +34,15 @@ public class JDBC {
         }
     }
 
-    public static Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(url, user, password);
+    public static Connection getConnection() {
+        if(conn==null) {
+            try {
+                conn = DriverManager.getConnection(url, user, password);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return conn;
+//        return DriverManager.getConnection(url, user, password);
     }
 }
