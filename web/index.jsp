@@ -13,9 +13,10 @@
     <style>
       *{
         margin:0;
-        padding:0;
-        box-sizing:border-box;
+        padding:0;       box-sizing:border-box;
         font-family: Arial, '微軟正黑體';
+        color: #fbd864;
+        font-size: 18px;
       }
 
       body {
@@ -24,9 +25,7 @@
         justify-content: center;
         align-items: center;
         background: linear-gradient(to right, #232526, #414345);
-        /* background-color: 	#232324; */
       }
-
       fieldset {
         border: 2px solid #fbd864;
         border-radius: 10px;
@@ -104,17 +103,17 @@
     </style>
   </head>
   <body>
-    <form action="list.jsp" method="post">
+    <form action="list" method="post">
       <fieldset>
         <legend>Form Check</legend>
         <div class="row">
           <label for="name">產品名稱</label>
-          <input name="name" autocomplete="off" type="text" placeholder="請輸入產品名稱" id="name" maxlength="6" onblur="checkName()">
+          <input value="我我我" name="name" autocomplete="off" type="text" placeholder="請輸入產品名稱" id="name" maxlength="6" onblur="checkName()">
           <span class="nameTip"></span>
         </div>
         <div class="row">
           <label for="price">產品售價</label>
-          <input name="price" autocomplete="off" type="text" placeholder="請輸入產品售價" id="price" maxlength="12" onblur="ckeckPrice()">
+          <input value="123" name="price" autocomplete="off" type="text" placeholder="請輸入產品售價" id="price" maxlength="12" onblur="ckeckPrice()">
           <span class="priceTip"></span>
         </div>
 <%--        <div class="row">--%>
@@ -124,10 +123,10 @@
 <%--        </div>--%>
         <div class="row">
           <label for="date">建立日期</label>
-          <input name="date" autocomplete="off" placeholder="請輸入日期" id="date" onblur="ckeckDate()">
+          <input value="2020/10/10" name="date" autocomplete="off" placeholder="請輸入日期" id="date" onblur="ckeckDate()">
           <span class="dateTip"></span>
         </div>
-        <button onclick="submit()">送出</button>
+        <button type="submit" onclick="submit()">送出</button>
       </fieldset>
     </form>
     <script>

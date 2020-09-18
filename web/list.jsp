@@ -9,8 +9,31 @@
 <html>
 <head>
     <title>Title</title>
+    <link rel="stylesheet" href="./style/all.css">
+    <style>
+        *{
+            margin:0;
+            padding:0;       box-sizing:border-box;
+            font-family: Arial, '微軟正黑體';
+            color: #fbd864;
+            font-size: 18px;
+        }
+
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(to right, #232526, #414345);
+        }
+    </style>
 </head>
 <body>
-    name is => ${name}
+<div>
+    <p>產品名稱 => ${name}</p>
+    <p>產品售價 => ${price}</p>
+    <p>建立日期 => ${date}</p>
+</div>
+
 </body>
 </html>
