@@ -9,7 +9,6 @@
 <html>
 <head>
     <title>Title</title>
-    <link rel="stylesheet" href="./style/all.css">
     <style>
         *{
             margin:0;

@@ -73,7 +73,7 @@
         color: #fbd864;
       }
 
-      button{
+      input[type=submit]{
         font-size: 14px;
         padding: 5px 10px;
         border-radius: 5px;
@@ -82,7 +82,7 @@
         background-color:#414345;
       }
 
-      button:hover{
+      input[type=submit]:hover{
         background-color:#fbd864;
         color: #414345;
         transition: .5s;
@@ -103,7 +103,7 @@
     </style>
   </head>
   <body>
-    <form action="list" method="post">
+    <form id="myForm" name="myForm" action="list" method="post">
       <fieldset>
         <legend>Form Check</legend>
         <div class="row">
@@ -116,17 +116,12 @@
           <input value="123" name="price" autocomplete="off" type="text" placeholder="請輸入產品售價" id="price" maxlength="12" onblur="ckeckPrice()">
           <span class="priceTip"></span>
         </div>
-<%--        <div class="row">--%>
-<%--          <label for="password">密碼</label>--%>
-<%--          <input autocomplete="off" type="password" placeholder="請輸入密碼" id="password" maxlength="12" onblur="ckeckPassword()">--%>
-<%--          <span class="pswTip"></span>--%>
-<%--        </div>--%>
         <div class="row">
           <label for="date">建立日期</label>
           <input value="2020/10/10" name="date" autocomplete="off" placeholder="請輸入日期" id="date" onblur="ckeckDate()">
           <span class="dateTip"></span>
         </div>
-        <button type="submit" onclick="submit()">送出</button>
+        <input type="submit" value="送出" onsubmit="return submit()"/>
       </fieldset>
     </form>
     <script>
@@ -151,7 +146,7 @@
       function ckeckPrice() {
         let value = document.querySelector("#price").value
         let nameTip = document.querySelector(".priceTip")
-        let regNum = /[0-9]{1,}/g
+        let regNum = /^[0-9]*$/g
         if (value === "") {
           nameTip.innerHTML = errIcon("產品售價不可空白")
         } else if (!regNum.test(value)) {
@@ -160,23 +155,6 @@
           nameTip.innerHTML = correctIcon
         }
       }
-      // function ckeckPassword() {
-      //   let value = document.querySelector("#password").value
-      //   let nameTip = document.querySelector(".pswTip")
-      //   let regEn = /[a-zA-Z]{1,}/g
-      //   let regNum = /[0-9]{1,}/g
-      //   let regSymBol = /[!@#$%^&*]{1,}/g
-      //   console.log(value);
-      //   if (value === "") {
-      //     nameTip.innerHTML = errIcon("密碼不可空白")
-      //   } else if (value.length < 7) {
-      //     nameTip.innerHTML = errIcon("密碼必須大於6個字")
-      //   } else if (!regEn.test(value) || !regNum.test(value) || !regSymBol.test(value)) {
-      //     nameTip.innerHTML = errIcon("密碼必須包含英文&數字&特殊字元")
-      //   } else {
-      //     nameTip.innerHTML = correctIcon
-      //   }
-      // }
       function ckeckDate() {
         let value = document.querySelector("#date").value
         let dateTip = document.querySelector(".dateTip")
@@ -195,7 +173,8 @@
         }
       }
       function submit() {
-        console.log('123')
+        // document.myForm.submit()
+        return false
       }
     </script>
   </body>

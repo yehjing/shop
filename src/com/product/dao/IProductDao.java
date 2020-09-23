@@ -1,11 +1,12 @@
-package com.product.model;
+package com.product.dao;
 
-import java.sql.Connection;
+import com.product.vo.ProductVo;
+
 import java.sql.SQLException;
 import java.util.List;
 
 public interface IProductDao {
-    public void insert();
+    public void insert(ProductVo ProductVo) throws SQLException;
     public void update();
     public void delete(int id) throws SQLException;
     public List getResult();

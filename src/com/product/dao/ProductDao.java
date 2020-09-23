@@ -1,5 +1,6 @@
-package com.product.model;
+package com.product.dao;
 
+import com.product.vo.ProductVo;
 import utils.JDBC;
 
 import java.sql.Connection;
@@ -7,17 +8,25 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
-
+/*
+ * 這邊放對 DB 的操作
+ */
 public class ProductDao implements IProductDao {
 
     private static Connection conn = JDBC.getConnection();
 
-    private PreparedStatement ptmt = null;
+    private PreparedStatement pstmt = null;
     private ResultSet rs = null;
 
     @Override
-    public void insert() {
+    public void insert(ProductVo vo) throws SQLException {
+        String sql = "insert into product (name, price, creat_date, update_date) values(?,?,?,?)";
+        pstmt = conn.prepareStatement(sql);
 
+        pstmt.setString(1, vo.getName());
+        pstmt.setInt(2, vo.getPrice());
+        pstmt.setString(3, vo.getCreat_date());
+        pstmt.setString(4, vo.getUpdate_date());
     }
 
     @Override
@@ -29,15 +38,15 @@ public class ProductDao implements IProductDao {
     public void delete(int id) throws SQLException {
         String sql = "delete from product where id=?";
         try{
-            ptmt = conn.prepareStatement(sql);
+            pstmt = conn.prepareStatement(sql);
             // 對SQL語句中的第一個占位符賦值
-            ptmt.setInt(1, id);
+            pstmt.setInt(1, id);
             // 執行更新操作
-            ptmt.executeUpdate();
+            pstmt.executeUpdate();
 
         }finally{
-            if (ptmt != null) {
-                ptmt.close();
+            if (pstmt != null) {
+                pstmt.close();
             }
             if (conn != null) {
                 conn.close();
