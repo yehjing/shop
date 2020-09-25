@@ -917,137 +917,169 @@ SELECT|sys.sys_config:null
     </user>
     <table id="286" parent="2" name="attraction"/>
     <table id="287" parent="2" name="product"/>
-    <column id="288" parent="286" name="id">
+    <table id="288" parent="2" name="t_user"/>
+    <column id="289" parent="286" name="id">
       <Position>1</Position>
       <Comment>ID</Comment>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="289" parent="286" name="info_uuid">
+    <column id="290" parent="286" name="info_uuid">
       <Position>2</Position>
       <Comment>旅遊資料ID</Comment>
       <DataType>varchar(50)|0s</DataType>
     </column>
-    <column id="290" parent="286" name="name">
+    <column id="291" parent="286" name="name">
       <Position>3</Position>
       <Comment>景點名稱</Comment>
       <DataType>varchar(50)|0s</DataType>
     </column>
-    <column id="291" parent="286" name="intro">
+    <column id="292" parent="286" name="intro">
       <Position>4</Position>
       <Comment>景點介紹</Comment>
       <DataType>varchar(800)|0s</DataType>
     </column>
-    <column id="292" parent="286" name="tel">
+    <column id="293" parent="286" name="tel">
       <Position>5</Position>
       <Comment>電話</Comment>
       <DataType>varchar(50)|0s</DataType>
     </column>
-    <column id="293" parent="286" name="address">
+    <column id="294" parent="286" name="address">
       <Position>6</Position>
       <Comment>地址</Comment>
       <DataType>varchar(50)|0s</DataType>
     </column>
-    <column id="294" parent="286" name="region">
+    <column id="295" parent="286" name="region">
       <Position>7</Position>
       <Comment>縣市</Comment>
       <DataType>varchar(10)|0s</DataType>
     </column>
-    <column id="295" parent="286" name="town">
+    <column id="296" parent="286" name="town">
       <Position>8</Position>
       <Comment>區</Comment>
       <DataType>varchar(10)|0s</DataType>
     </column>
-    <column id="296" parent="286" name="travel_info">
+    <column id="297" parent="286" name="travel_info">
       <Position>9</Position>
       <Comment>交通資訊</Comment>
       <DataType>varchar(500)|0s</DataType>
     </column>
-    <column id="297" parent="286" name="open_time">
+    <column id="298" parent="286" name="open_time">
       <Position>10</Position>
       <Comment>營業時間</Comment>
       <DataType>varchar(200)|0s</DataType>
     </column>
-    <column id="298" parent="286" name="web_site">
+    <column id="299" parent="286" name="web_site">
       <Position>11</Position>
       <Comment>網頁</Comment>
       <DataType>varchar(200)|0s</DataType>
     </column>
-    <column id="299" parent="286" name="zipcode">
+    <column id="300" parent="286" name="zipcode">
       <Position>12</Position>
       <Comment>郵遞區號</Comment>
       <DataType>int|0s</DataType>
     </column>
-    <column id="300" parent="286" name="ticket_info">
+    <column id="301" parent="286" name="ticket_info">
       <Position>13</Position>
       <Comment>票價資訊</Comment>
       <DataType>varchar(200)|0s</DataType>
     </column>
-    <column id="301" parent="286" name="px">
+    <column id="302" parent="286" name="px">
       <Position>14</Position>
       <Comment>經度</Comment>
       <DataType>decimal(15,8 digit)|0s</DataType>
     </column>
-    <column id="302" parent="286" name="py">
+    <column id="303" parent="286" name="py">
       <Position>15</Position>
       <Comment>緯度</Comment>
       <DataType>decimal(15,8 digit)|0s</DataType>
     </column>
-    <index id="303" parent="286" name="attraction_id_uindex">
+    <index id="304" parent="286" name="attraction_id_uindex">
       <ColNames>id</ColNames>
       <Unique>1</Unique>
       <Type>btree</Type>
     </index>
-    <key id="304" parent="286" name="PRIMARY">
+    <key id="305" parent="286" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="305" parent="286" name="attraction_id_uindex">
+    <key id="306" parent="286" name="attraction_id_uindex">
       <ColNames>id</ColNames>
       <UnderlyingIndexName>attraction_id_uindex</UnderlyingIndexName>
     </key>
-    <column id="306" parent="287" name="id">
+    <column id="307" parent="287" name="id">
       <Position>1</Position>
       <Comment>ID</Comment>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="307" parent="287" name="name">
+    <column id="308" parent="287" name="name">
       <Position>2</Position>
       <Comment>產品名稱</Comment>
       <DataType>varchar(50)|0s</DataType>
     </column>
-    <column id="308" parent="287" name="price">
+    <column id="309" parent="287" name="price">
       <Position>3</Position>
       <Comment>產品價格</Comment>
       <DataType>int|0s</DataType>
     </column>
-    <column id="309" parent="287" name="creat_date">
+    <column id="310" parent="287" name="creat_date">
       <Position>4</Position>
       <Comment>建立日期</Comment>
       <DataType>varchar(50)|0s</DataType>
     </column>
-    <column id="310" parent="287" name="update_date">
+    <column id="311" parent="287" name="update_date">
       <Position>5</Position>
       <Comment>更新日期</Comment>
       <DataType>varchar(50)|0s</DataType>
     </column>
-    <index id="311" parent="287" name="id">
+    <index id="312" parent="287" name="id">
       <ColNames>id</ColNames>
       <Unique>1</Unique>
       <Type>btree</Type>
     </index>
-    <key id="312" parent="287" name="PRIMARY">
+    <key id="313" parent="287" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="313" parent="287" name="id">
+    <key id="314" parent="287" name="id">
       <ColNames>id</ColNames>
       <UnderlyingIndexName>id</UnderlyingIndexName>
+    </key>
+    <column id="315" parent="288" name="id">
+      <Position>1</Position>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>null</SequenceIdentity>
+    </column>
+    <column id="316" parent="288" name="username">
+      <Position>2</Position>
+      <DataType>varchar(50)|0s</DataType>
+    </column>
+    <column id="317" parent="288" name="password">
+      <Position>3</Position>
+      <DataType>varchar(50)|0s</DataType>
+    </column>
+    <column id="318" parent="288" name="verifyCode">
+      <Position>4</Position>
+      <DataType>varchar(50)|0s</DataType>
+    </column>
+    <column id="319" parent="288" name="age">
+      <Position>5</Position>
+      <DataType>int|0s</DataType>
+    </column>
+    <column id="320" parent="288" name="gender">
+      <Position>6</Position>
+      <DataType>varchar(50)|0s</DataType>
+    </column>
+    <key id="321" parent="288" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
     </key>
   </database-model>
 </dataSource>

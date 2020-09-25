@@ -19,14 +19,37 @@ public class ProductDao implements IProductDao {
     private ResultSet rs = null;
 
     @Override
-    public void insert(ProductVo vo) throws SQLException {
+    public void insert(ProductVo vo) {
         String sql = "insert into product (name, price, creat_date, update_date) values(?,?,?,?)";
-        pstmt = conn.prepareStatement(sql);
+        try{
+            pstmt = conn.prepareStatement(sql);
 
-        pstmt.setString(1, vo.getName());
-        pstmt.setInt(2, vo.getPrice());
-        pstmt.setString(3, vo.getCreat_date());
-        pstmt.setString(4, vo.getUpdate_date());
+            pstmt.setString(1, vo.getName());
+            pstmt.setInt(2, vo.getPrice());
+            pstmt.setString(3, vo.getCreat_date());
+            pstmt.setString(4, vo.getUpdate_date());
+
+            pstmt.executeUpdate();
+
+        } catch (SQLException e){
+            System.out.println(e);
+        } finally {
+            if(pstmt != null){
+                try {
+                    pstmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
     }
 
     @Override
