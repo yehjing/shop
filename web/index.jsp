@@ -11,6 +11,7 @@
   <head>
     <title>$Title$</title>
     <script src="https://kit.fontawesome.com/e59a78301c.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
     <style>
       *{
         margin:0;
@@ -74,7 +75,7 @@
         color: #fbd864;
       }
 
-      input[type=submit]{
+      a{
         font-size: 14px;
         padding: 5px 10px;
         border-radius: 5px;
@@ -83,7 +84,8 @@
         background-color:#414345;
       }
 
-      input[type=submit]:hover{
+      a:hover{
+        cursor: pointer;
         background-color:#fbd864;
         color: #414345;
         transition: .5s;
@@ -105,88 +107,127 @@
     </style>
   </head>
   <body>
-    <form id="myForm" name="myForm" action="list" method="post">
+
+    <form id="myForm" name="myForm" method="post" onsubmit="return false">
       <fieldset>
         <legend>Form Check</legend>
         <div class="row">
           <label for="name">產品名稱</label>
-          <input name="name" autocomplete="off" type="text" placeholder="請輸入產品名稱" id="name" maxlength="6">
-          <c:if test="${not empty errorMsgs.name}">
-            <span class="nameTip">
-              <i class="error far fa-times-circle">${errorMsgs.name}</i>
-            </span>
-          </c:if>
+          <input onblur="checkName()" name="name" autocomplete="off" type="text" placeholder="請輸入產品名稱" id="name" maxlength="6">
+          <span class="nameTip">
+<%--            <c:if test="${not empty errorMsgs.name}">--%>
+<%--              <i class="error far fa-times-circle">${errorMsgs.name}</i>--%>
+<%--            </c:if>--%>
+          </span>
 
         </div>
         <div class="row">
           <label for="price">產品售價</label>
-          <input name="price" autocomplete="off" type="text" placeholder="請輸入產品售價" id="price" maxlength="12">
-            <c:if test="${not empty errorMsgs.price}">
+          <input onblur="checkPrice()" name="price" autocomplete="off" type="text" placeholder="請輸入產品售價" id="price" maxlength="12">
                 <span class="priceTip">
-                  <i class="error far fa-times-circle">${errorMsgs.price}</i>
+<%--            <c:if test="${not empty errorMsgs.price}">--%>
+<%--                  <i class="error far fa-times-circle">${errorMsgs.price}</i>--%>
+<%--            </c:if>--%>
                 </span>
-            </c:if>
         </div>
         <div class="row">
           <label for="date">建立日期</label>
-          <input name="date" autocomplete="off" placeholder="請輸入日期" id="date">
-            <c:if test="${not empty errorMsgs.date}">
+          <input onblur="checkDate()" name="date" autocomplete="off" placeholder="請輸入日期" id="date">
                 <span class="dateTip">
-                  <i class="error far fa-times-circle">${errorMsgs.date}</i>
+<%--            <c:if test="${not empty errorMsgs.date}">--%>
+<%--                  <i class="error far fa-times-circle">${errorMsgs.date}</i>--%>
+<%--            </c:if>--%>
                 </span>
-            </c:if>
         </div>
-        <input type="submit" value="送出"/>
+        <a onclick="submit()">送出</a>
       </fieldset>
     </form>
     <script>
+      // let name1 = document.querySelector("#name").value
+      // let price1 = document.querySelector("#price").value
+      // let date1 = document.querySelector("#date").value
+      let errIcon = msg => '<i class="error far fa-times-circle">' + msg + '</i>'
+      let correctIcon = '<i class="success far fa-check-circle">正確</i>'
 
-      // let errIcon = msg => '<i class="error far fa-times-circle">' + msg + '</i>'
-      // let correctIcon = '<i class="success far fa-check-circle">正確</i>'
-      //
-      // function checkName() {
-      //   let value = document.querySelector("#name").value
-      //   let nameTip = document.querySelector(".nameTip")
-      //   let reg = /^[\u4e00-\u9fa5]*$/g
-      //   if (!value) {
-      //     nameTip.innerHTML = errIcon("產品名稱不可為空值")
-      //   } else if (value.length < 2) {
-      //     nameTip.innerHTML = errIcon("產品名稱必須大於2個字")
-      //   } else if (!reg.test(value)) {
-      //     nameTip.innerHTML = errIcon("產品名稱必須為中文字")
-      //   } else {
-      //     nameTip.innerHTML = correctIcon
-      //   }
-      // }
-      // function ckeckPrice() {
-      //   let value = document.querySelector("#price").value
-      //   let nameTip = document.querySelector(".priceTip")
-      //   let regNum = /^[0-9]*$/g
-      //   if (value === "") {
-      //     nameTip.innerHTML = errIcon("產品售價不可空白")
-      //   } else if (!regNum.test(value)) {
-      //     nameTip.innerHTML = errIcon("產品售價必須是數字")
-      //   } else {
-      //     nameTip.innerHTML = correctIcon
-      //   }
-      // }
-      // function ckeckDate() {
-      //   let value = document.querySelector("#date").value
-      //   let dateTip = document.querySelector(".dateTip")
-      //   let reg = /^([0-9]{4})[./]{1}([0-9]{1,2})[./]{1}([0-9]{1,2})$/g
-      //   let valArr = value.split('/')
-      //   if (!value) {
-      //     dateTip.innerHTML = errIcon("日期不可空白")
-      //   } else if (!reg.test(value)) {
-      //     dateTip.innerHTML = errIcon("日期格式錯誤")
-      //   } else if (Number(valArr[1]) < 1 || Number(valArr[1]) > 12) {
-      //     dateTip.innerHTML = errIcon("月份區間錯誤")
-      //   } else if (Number(valArr[2]) < 1 || Number(valArr[2]) > 31) {
-      //     dateTip.innerHTML = errIcon("日期區間錯誤")
-      //   } else {
-      //     dateTip.innerHTML = correctIcon
-      //   }
-      // }
+      function submit(){
+        let checkAll = checkName() && checkPrice() && checkDate()
+        console.log('checkAll',checkAll)
+        if(checkAll){
+          let data =  {
+            name: $("#name").val(),
+            price: $("#price").val(),
+            creat_date: $("#date").val()
+          }
+          $.ajax({
+            type : "post",//傳送方式
+            url : "<%=request.getContextPath()%>/ProductServlet",// 路徑
+            contentType : 'application/json; charset=utf-8',
+            data : JSON.stringify(data),
+            success: function(res){
+              location.href = "<%=request.getContextPath()%>/list.jsp"
+            },
+            error: function(err) {alert(err.msg);}
+          })
+        } else {
+          return false
+        }
+      }
+
+      function checkName() {
+        let name = document.querySelector("#name").value
+        let nameTip = document.querySelector(".nameTip")
+        let reg = /^[\u4e00-\u9fa5]*$/g
+        if (!name) {
+          nameTip.innerHTML = errIcon("產品名稱不可為空值")
+          return false
+        } else if (name.length < 2) {
+          nameTip.innerHTML = errIcon("產品名稱必須大於2個字")
+          return false
+        } else if (!reg.test(name)) {
+          nameTip.innerHTML = errIcon("產品名稱必須為中文字")
+          return false
+        } else {
+          nameTip.innerHTML = correctIcon
+          return true
+        }
+      }
+      function checkPrice() {
+        let price = document.querySelector("#price").value
+        let nameTip = document.querySelector(".priceTip")
+        let regNum = /^[1-9][0-9]*$/g
+        if (price === "") {
+          nameTip.innerHTML = errIcon("產品售價不可空白")
+          return false
+        } else if (!regNum.test(price)) {
+          nameTip.innerHTML = errIcon("產品售價必須是數字且須大於0")
+          return false
+        } else {
+          nameTip.innerHTML = correctIcon
+          return true
+        }
+      }
+      function checkDate() {
+        let date = document.querySelector("#date").value
+        let dateTip = document.querySelector(".dateTip")
+        let reg = /^([0-9]{4})[/]{1}([0-9]{1,2})[/]{1}([0-9]{1,2})$/g
+        let valArr = date.split('/')
+        if (!date) {
+          dateTip.innerHTML = errIcon("日期不可空白")
+          return false
+        } else if (!reg.test(date)) {
+          dateTip.innerHTML = errIcon("日期格式錯誤")
+          return false
+        } else if (Number(valArr[1]) < 1 || Number(valArr[1]) > 12) {
+          dateTip.innerHTML = errIcon("月份區間錯誤")
+          return false
+        } else if (Number(valArr[2]) < 1 || Number(valArr[2]) > 31) {
+          dateTip.innerHTML = errIcon("日期區間錯誤")
+          return false
+        } else {
+          dateTip.innerHTML = correctIcon
+          return true
+        }
+      }
       // function submit() {
       //   // document.myForm.submit()
       //   return false

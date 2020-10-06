@@ -29,6 +29,9 @@
 </head>
 <body>
 <div>
+    <p>產品名稱 => </p>
+    <p>產品售價 => </p>
+    <p>建立日期 => </p>
     <p>產品名稱 => ${data.name}</p>
     <p>產品售價 => ${data.price}</p>
     <p>建立日期 => ${data.date}</p>
