@@ -8,18 +8,12 @@ import java.util.Properties;
 
 public class JDBC {
     //資料庫驅動
-//    private static final String driver = "com.mysql.cj.jdbc.Driver";
-//    private static final String serverName = "localhost";
-//    private static final String database = "db01";
-//    //要連線到的資料庫地址
-//    private static final String url = "jdbc:mysql://" + serverName + "/" + database + "?serverTimezone=GMT%2B8";
-//    //資料庫的帳號和密碼
-//    private static final String user = "db01";
-//    private static final String password = "aa123456AA";
-
     private static Properties properties = null;
-    private static Connection conn = null;  //資料庫連線物件，採用單例模式
-    static {
+    /** Connection 不能為靜態類別 否則重整後關閉連線池後續會出現 No operations allowed after connection closed. */
+//    private static Connection conn = null;
+    public static Connection getConnection() {
+        /** 要寫在這 每次呼叫時重新建立連線 */
+        Connection conn = null;
         try {
             InputStream in = JDBC.class.getClassLoader().getResourceAsStream("dbconfig.properties");
             properties = new Properties();
@@ -35,18 +29,7 @@ public class JDBC {
             System.out.println("找不到驅動程式類別");
             e.printStackTrace();
         }
-    }
-//    private JDBC() {
-//        try {
-//            Class.forName(driver);
-//            System.out.println("Driver loaded!");
-//        } catch (ClassNotFoundException e) {
-//            System.out.println("找不到驅動程式類別");
-//            e.printStackTrace();
-//        }
-//    }
 
-    public static Connection getConnection() {
         if(conn == null) {
             try {
                 conn = DriverManager.getConnection(
@@ -58,6 +41,5 @@ public class JDBC {
             }
         }
         return conn;
-//        return DriverManager.getConnection(url, user, password);
     }
 }
