@@ -21,4 +21,13 @@
         <servlet-name>ProductResultServlet</servlet-name>
         <url-pattern>/ProductResultServlet</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ProductDeleteServlet</servlet-name>
+        <servlet-class>com.product.controller.ProductDeleteServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ProductDeleteServlet</servlet-name>
+        <url-pattern>/ProductDeleteServlet</url-pattern>
+    </servlet-mapping>
 </web-app>

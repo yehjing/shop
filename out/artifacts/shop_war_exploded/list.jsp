@@ -54,6 +54,25 @@
                 width: 100%;
                 object-fit: cover;
             }
+            a{
+                font-size: 14px;
+                padding: 5px 10px;
+                border-radius: 5px;
+                color: #fbd864;
+                border: 1px solid #fbd864;
+                background-color:#414345;
+                text-decoration: none;
+            }
+
+            a:hover{
+                cursor: pointer;
+                background-color:#fbd864;
+                color: #414345;
+                transition: .5s;
+            }
+            a:active{
+                color: #fbd864;
+            }
         </style>
     </head>
     <body>
@@ -65,54 +84,17 @@
 <%--                    </figure>--%>
 <%--                    <p>產品名稱</p>--%>
 <%--                    <p>$200</p>--%>
-<%--                </li>--%>
-<%--                <li>--%>
-<%--                    <figure>--%>
-<%--                        <img src="https://i.pinimg.com/564x/5d/fa/39/5dfa39270bf43d17a907e45d3b1ee96c.jpg" alt="">--%>
-<%--                    </figure>--%>
-<%--                    <p>產品名稱</p>--%>
-<%--                    <p>$ </p>200--%>
-<%--                </li>--%>
-<%--                <li>--%>
-<%--                    <figure>--%>
-<%--                        <img src="https://i.pinimg.com/564x/5d/fa/39/5dfa39270bf43d17a907e45d3b1ee96c.jpg" alt="">--%>
-<%--                    </figure>--%>
-<%--                    <p>產品名稱</p>--%>
-<%--                    <p>$200</p>--%>
-<%--                </li>--%>
-<%--                <li>--%>
-<%--                    <figure>--%>
-<%--                        <img src="https://i.pinimg.com/564x/5d/fa/39/5dfa39270bf43d17a907e45d3b1ee96c.jpg" alt="">--%>
-<%--                    </figure>--%>
-<%--                    <p>產品名稱</p>--%>
-<%--                    <p>$200</p>--%>
-<%--                </li>--%>
-<%--                <li>--%>
-<%--                    <figure>--%>
-<%--                        <img src="https://i.pinimg.com/564x/5d/fa/39/5dfa39270bf43d17a907e45d3b1ee96c.jpg" alt="">--%>
-<%--                    </figure>--%>
-<%--                    <p>產品名稱</p>--%>
-<%--                    <p>$200</p>--%>
-<%--                </li>--%>
-<%--                <li>--%>
-<%--                    <figure>--%>
-<%--                        <img src="https://i.pinimg.com/564x/5d/fa/39/5dfa39270bf43d17a907e45d3b1ee96c.jpg" alt="">--%>
-<%--                    </figure>--%>
-<%--                    <p>產品名稱</p>--%>
-<%--                    <p>$200</p>--%>
+<%--                    <a href="javascript:;">刪除</a>--%>
 <%--                </li>--%>
 
             </ul>
-            <p>產品名稱 => </p>
-            <p>產品售價 => </p>
-            <p>建立日期 => </p>
-            <p>產品名稱 => ${data.name}</p>
-            <p>產品售價 => ${data.price}</p>
-            <p>建立日期 => ${data.date}</p>
         </div>
 
         <script>
             $(document).ready(function(){
+                getInitData()
+            })
+            let getInitData = function (){
                 $.ajax({
                     type : "post",//傳送方式
                     url : "<%=request.getContextPath()%>/ProductResultServlet",// 路徑
@@ -120,11 +102,8 @@
                     // data : {},
                     success: function(res){
                         let { result = [] } = JSON.parse(res).data
-                        let a = JSON.parse(res)
-                        let b = a.data.result
-                        console.log(b)
-                        b.forEach(function (item){
-                            // console.log(item)
+                        $(".productUl").children().remove();
+                        result.forEach(function (item){
                             let htmlTemplate = `
                                 <li data-id="${'${item.id}'}">
                                     <figure>
@@ -132,6 +111,7 @@
                                     </figure>
                                     <p>${"${item.name}"}</p>
                                     <p>${"${item.price}"}</p>
+                                    <a href="javascript:;" onclick="del(${"${item.id}"})">刪除</a>
                                 </li>
                             `
                             $(".productUl").append(htmlTemplate)
@@ -140,8 +120,21 @@
                     },
                     error: function(err) {alert(err.msg);}
                 })
+            }
+            let del = function (id){
+                $.ajax({
+                    type : "get",//傳送方式
+                    url : "<%=request.getContextPath()%>/ProductDeleteServlet?id=" + id,// 路徑
+                    contentType : 'application/json; charset=utf-8',
+                    // data : {},
+                    success: function(res){
 
-            })
+                        console.log("res", JSON.parse(res))
+                        getInitData()
+                    },
+                    error: function(err) {alert(err.msg);}
+                })
+            }
         </script>
     </body>
 </html>

@@ -64,23 +64,35 @@ public class ProductDao implements IProductDao {
      * 刪除產品
      */
     @Override
-    public void delete(int id) throws SQLException {
+    public boolean delete(Integer id) {
         String sql = "delete from product where id=?";
+        int times = 0;
         try{
             pstmt = conn.prepareStatement(sql);
             // 對SQL語句中的第一個占位符賦值
             pstmt.setInt(1, id);
             // 執行更新操作
-            pstmt.executeUpdate();
+            times = pstmt.executeUpdate();
 
-        }finally{
+        } catch (SQLException e){
+            System.out.println(e);
+        } finally{
             if (pstmt != null) {
-                pstmt.close();
+                try {
+                    pstmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
             }
             if (conn != null) {
-                conn.close();
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
             }
         }
+        return times > 0;
     }
 
     /**

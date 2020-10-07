@@ -17,4 +17,8 @@ public class ProductService {
         ProductDao dao = new ProductDao();
         return dao.getAllProduct();
     }
+    public boolean delProduct (Integer id) {
+        ProductDao dao = new ProductDao();
+        return dao.delete(id);
+    }
 }
