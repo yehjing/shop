@@ -228,6 +228,7 @@
           return true
         }
       }
+
       // function submit() {
       //   // document.myForm.submit()
       //   return false

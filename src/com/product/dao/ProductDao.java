@@ -3,21 +3,21 @@ package com.product.dao;
 import com.product.vo.ProductVo;
 import utils.JDBC;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.List;
+import java.sql.*;
+import java.util.ArrayList;
 /*
  * 這邊放對 DB 的操作
  */
 public class ProductDao implements IProductDao {
 
-    private static Connection conn = JDBC.getConnection();
+    private Connection conn = JDBC.getConnection(); //取得連線
 
     private PreparedStatement pstmt = null;
-    private ResultSet rs = null;
+    private ResultSet rs = null; // 取資料用
 
+    /**
+     * 新增 1 筆產品
+     */
     @Override
     public void insert(ProductVo vo) {
         String sql = "insert into product (name, price, creat_date, update_date) values(?,?,?,?)";
@@ -52,11 +52,17 @@ public class ProductDao implements IProductDao {
 
     }
 
+    /**
+     * 更新產品資訊
+     */
     @Override
     public void update() {
 
     }
 
+    /**
+     * 刪除產品
+     */
     @Override
     public void delete(int id) throws SQLException {
         String sql = "delete from product where id=?";
@@ -77,8 +83,58 @@ public class ProductDao implements IProductDao {
         }
     }
 
+    /**
+     * 取得所有產品
+     */
     @Override
-    public List getResult() {
-        return null;
+    public ArrayList<ProductVo> getAllProduct() {
+        String sql = "select * from product";
+        ArrayList<ProductVo> list = new ArrayList();
+
+        try{
+            pstmt = conn.prepareStatement(sql);
+            rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                ProductVo vo = new ProductVo();
+
+                vo.setId(rs.getInt("id"));
+                vo.setName(rs.getString("name"));
+                vo.setPrice(rs.getInt("price"));
+                vo.setCreat_date(rs.getString("creat_date"));
+                vo.setUpdate_date(rs.getString("update_date"));
+
+                list.add(vo);
+            }
+
+
+        } catch (SQLException e){
+            System.out.println(e);
+        } finally {
+            if(pstmt != null){
+                try {
+                    pstmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+
+        return list;
     }
 }

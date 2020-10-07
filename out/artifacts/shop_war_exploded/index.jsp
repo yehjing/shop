@@ -164,7 +164,7 @@
             contentType : 'application/json; charset=utf-8',
             data : JSON.stringify(data),
             success: function(res){
-              location.href = "/list.jsp"
+              location.href = "<%=request.getContextPath()%>/list.jsp"
             },
             error: function(err) {alert(err.msg);}
           })
@@ -228,6 +228,7 @@
           return true
         }
       }
+
       // function submit() {
       //   // document.myForm.submit()
       //   return false

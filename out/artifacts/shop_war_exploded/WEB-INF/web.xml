@@ -12,4 +12,13 @@
         <servlet-name>ProductServlet</servlet-name>
         <url-pattern>/ProductServlet</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ProductResultServlet</servlet-name>
+        <servlet-class>com.product.controller.ProductResultServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ProductResultServlet</servlet-name>
+        <url-pattern>/ProductResultServlet</url-pattern>
+    </servlet-mapping>
 </web-app>

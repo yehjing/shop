@@ -9,5 +9,5 @@ public interface IProductDao {
     public void insert(ProductVo ProductVo) throws SQLException;
     public void update();
     public void delete(int id) throws SQLException;
-    public List getResult();
+    public List getAllProduct();
 }
