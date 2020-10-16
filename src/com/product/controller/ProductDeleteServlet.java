@@ -14,11 +14,6 @@ import java.util.HashMap;
 
 public class ProductDeleteServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    //    @Override
-//    protected void doPost(HttpServletRequest req, HttpServletResponse res)
-//            throws IOException {
-//        doGet(req, res);
-//    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse res)

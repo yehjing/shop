@@ -140,10 +140,66 @@
 <%--            </c:if>--%>
                 </span>
         </div>
+          <div class="row">
+              <label for="productImg">商品圖片</label>
+              <input accept="image/*" type="file" id="productImg" name="productImg" onchange="handleFiles()">
+          </div>
         <a onclick="submit()">送出</a>
       </fieldset>
     </form>
     <script>
+        // function handleFiles(e) {
+        //     let fileList = document.querySelector("input[type=file]").files
+        //     console.log('fileList', fileList)
+        //     /* now you can work with the file list */
+        // }
+        let filePathTemp;
+        // 圖片上傳
+        function uploadImg(type, imgBase64){
+            let data =  {
+                type: type,
+                imgBase64:imgBase64
+            }
+            $.ajax({
+                type : "post",//傳送方式
+                url : "<%=request.getContextPath()%>/ProductUploadServlet",// 路徑
+                contentType : 'application/json; charset=utf-8',
+                data : JSON.stringify(data),
+                success: function(res){
+                    filePathTemp = JSON.parse(res).data.filePath
+                    console.log('res', res)
+                },
+                error: function(err) {alert(err.msg);}
+            })
+        }
+        async function handleFiles(e) {
+
+            // STEP 2: 得到該檔案的 Blob, i.e., e.target.files
+            let fileList = document.querySelector("input[type=file]").files[0]
+            const arrayBuffer = await getDataURL(fileList);
+
+            let type = arrayBuffer.substring(0, arrayBuffer.indexOf("base64") - 1).split("/")[1]
+            let imgBase64 = arrayBuffer.substring(arrayBuffer.indexOf("base64") + 7, arrayBuffer.length)
+            uploadImg(type, imgBase64)
+            console.log('type', type)
+            console.log('data', imgBase64)
+            // a = Array.from(new Uint8Array(arrayBuffer));
+            // console.log('a', a);
+        }
+
+        function getDataURL(file) {
+            return new Promise((resolve, reject) => {
+                // 轉成 DataURL, i.e., reader.result
+                const reader = new FileReader();
+                console.log('reader', reader.result)
+                reader.addEventListener('load', () => {
+                    console.log(reader)
+                    resolve(reader.result);
+                });
+                // reader.readAsArrayBuffer(file);
+                reader.readAsDataURL(file) // 使用 readAsDataURL()
+            })
+        }
       // let name1 = document.querySelector("#name").value
       // let price1 = document.querySelector("#price").value
       // let date1 = document.querySelector("#date").value
@@ -157,7 +213,8 @@
           let data =  {
             name: $("#name").val(),
             price: $("#price").val(),
-            creat_date: $("#date").val()
+            creat_date: $("#date").val(),
+            imgPath: filePathTemp
           }
           $.ajax({
             type : "post",//傳送方式
@@ -166,6 +223,7 @@
             data : JSON.stringify(data),
             success: function(res){
               location.href = "<%=request.getContextPath()%>/list.jsp"
+                filePathTemp= ''
             },
             error: function(err) {alert(err.msg);}
           })

@@ -39,6 +39,7 @@ public class ProductServlet extends HttpServlet {
         String name = vo.getName(); // 取得請求參數
         Integer price = vo.getPrice(); // 取得請求參數
         String date = vo.getCreat_date(); // 取得請求參數
+        String imgPath = vo.getImg_path(); // 取得請求參數
         System.out.println("date=> " + date + "name=> " + name + "price=> " + price);
 //        Integer price = null;
 

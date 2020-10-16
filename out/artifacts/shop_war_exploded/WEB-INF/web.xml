@@ -30,4 +30,13 @@
         <servlet-name>ProductDeleteServlet</servlet-name>
         <url-pattern>/ProductDeleteServlet</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ProductUploadServlet</servlet-name>
+        <servlet-class>com.product.controller.ProductUploadServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ProductUploadServlet</servlet-name>
+        <url-pattern>/ProductUploadServlet</url-pattern>
+    </servlet-mapping>
 </web-app>

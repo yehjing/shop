@@ -2,6 +2,21 @@ package com.product.vo;
 
 public class ProductVo {
     private Integer id;
+    private String name;
+    private Integer price;
+    private String creat_date;
+    private String update_date;
+    private String img_path;
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    private String description;
 
     public Integer getId() {
         return id;
@@ -10,11 +25,6 @@ public class ProductVo {
     public void setId(Integer id) {
         this.id = id;
     }
-
-    private String name;
-    private Integer price;
-    private String creat_date;
-    private String update_date;
 
     public String getName() {
         return name;
@@ -46,5 +56,13 @@ public class ProductVo {
 
     public void setUpdate_date(String update_date) {
         this.update_date = update_date;
+    }
+
+    public String getImg_path() {
+        return img_path;
+    }
+
+    public void setImg_path(String img_path) {
+        this.img_path = img_path;
     }
 }

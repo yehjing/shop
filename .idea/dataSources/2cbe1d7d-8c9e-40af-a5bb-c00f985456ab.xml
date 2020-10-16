@@ -1036,47 +1036,56 @@ SELECT|sys.sys_config:null
       <Comment>更新日期</Comment>
       <DataType>varchar(50)|0s</DataType>
     </column>
-    <index id="312" parent="287" name="id">
+    <column id="312" parent="287" name="img_path">
+      <Position>6</Position>
+      <Comment>圖片上傳路徑</Comment>
+      <DataType>varchar(500)|0s</DataType>
+    </column>
+    <column id="313" parent="287" name="description">
+      <Position>7</Position>
+      <DataType>varchar(500)|0s</DataType>
+    </column>
+    <index id="314" parent="287" name="id">
       <ColNames>id</ColNames>
       <Unique>1</Unique>
       <Type>btree</Type>
     </index>
-    <key id="313" parent="287" name="PRIMARY">
+    <key id="315" parent="287" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="314" parent="287" name="id">
+    <key id="316" parent="287" name="id">
       <ColNames>id</ColNames>
       <UnderlyingIndexName>id</UnderlyingIndexName>
     </key>
-    <column id="315" parent="288" name="id">
+    <column id="317" parent="288" name="id">
       <Position>1</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="316" parent="288" name="username">
+    <column id="318" parent="288" name="username">
       <Position>2</Position>
       <DataType>varchar(50)|0s</DataType>
     </column>
-    <column id="317" parent="288" name="password">
+    <column id="319" parent="288" name="password">
       <Position>3</Position>
       <DataType>varchar(50)|0s</DataType>
     </column>
-    <column id="318" parent="288" name="verifyCode">
+    <column id="320" parent="288" name="verifyCode">
       <Position>4</Position>
       <DataType>varchar(50)|0s</DataType>
     </column>
-    <column id="319" parent="288" name="age">
+    <column id="321" parent="288" name="age">
       <Position>5</Position>
       <DataType>int|0s</DataType>
     </column>
-    <column id="320" parent="288" name="gender">
+    <column id="322" parent="288" name="gender">
       <Position>6</Position>
       <DataType>varchar(50)|0s</DataType>
     </column>
-    <key id="321" parent="288" name="PRIMARY">
+    <key id="323" parent="288" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>

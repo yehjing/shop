@@ -77,6 +77,7 @@
     </head>
     <body>
         <div>
+<%--            <img src="" alt="">--%>
             <ul class="productUl">
 <%--                <li>--%>
 <%--                    <figure>--%>
@@ -107,7 +108,7 @@
                             let htmlTemplate = `
                                 <li data-id="${'${item.id}'}">
                                     <figure>
-                                        <img src="https://i.pinimg.com/564x/5d/fa/39/5dfa39270bf43d17a907e45d3b1ee96c.jpg" alt="">
+                                        <img src="<%=request.getContextPath()%>${"${item.img_path}"}" alt="">
                                     </figure>
                                     <p>${"${item.name}"}</p>
                                     <p>${"${item.price}"}</p>

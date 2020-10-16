@@ -20,7 +20,7 @@ public class ProductDao implements IProductDao {
      */
     @Override
     public void insert(ProductVo vo) {
-        String sql = "insert into product (name, price, creat_date, update_date) values(?,?,?,?)";
+        String sql = "insert into product (name, price, creat_date, update_date, img_path) values(?,?,?,?,?)";
         try{
             pstmt = conn.prepareStatement(sql);
 
@@ -28,6 +28,7 @@ public class ProductDao implements IProductDao {
             pstmt.setInt(2, vo.getPrice());
             pstmt.setString(3, vo.getCreat_date());
             pstmt.setString(4, vo.getUpdate_date());
+            pstmt.setString(5, vo.getImg_path());
 
             pstmt.executeUpdate();
 
@@ -115,6 +116,7 @@ public class ProductDao implements IProductDao {
                 vo.setPrice(rs.getInt("price"));
                 vo.setCreat_date(rs.getString("creat_date"));
                 vo.setUpdate_date(rs.getString("update_date"));
+                vo.setImg_path(rs.getString("img_path"));
 
                 list.add(vo);
             }
