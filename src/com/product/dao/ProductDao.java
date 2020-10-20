@@ -20,15 +20,16 @@ public class ProductDao implements IProductDao {
      */
     @Override
     public void insert(ProductVo vo) {
-        String sql = "insert into product (name, price, creat_date, update_date, img_path) values(?,?,?,?,?)";
+        String sql = "insert into product (name, price, update_date, img_path, description) values(?,?,?,?,?)";
         try{
             pstmt = conn.prepareStatement(sql);
 
             pstmt.setString(1, vo.getName());
             pstmt.setInt(2, vo.getPrice());
-            pstmt.setString(3, vo.getCreat_date());
-            pstmt.setString(4, vo.getUpdate_date());
-            pstmt.setString(5, vo.getImg_path());
+//            pstmt.setTimestamp(3, vo.getCreat_date());
+            pstmt.setString(3, vo.getUpdate_date());
+            pstmt.setString(4, vo.getImg_path());
+            pstmt.setString(5, vo.getDescription());
 
             pstmt.executeUpdate();
 
@@ -114,9 +115,10 @@ public class ProductDao implements IProductDao {
                 vo.setId(rs.getInt("id"));
                 vo.setName(rs.getString("name"));
                 vo.setPrice(rs.getInt("price"));
-                vo.setCreat_date(rs.getString("creat_date"));
+                vo.setCreat_date(rs.getTimestamp("creat_date"));
                 vo.setUpdate_date(rs.getString("update_date"));
                 vo.setImg_path(rs.getString("img_path"));
+                vo.setDescription(rs.getString("description"));
 
                 list.add(vo);
             }

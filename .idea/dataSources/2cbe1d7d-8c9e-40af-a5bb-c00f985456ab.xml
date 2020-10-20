@@ -1029,7 +1029,8 @@ SELECT|sys.sys_config:null
     <column id="310" parent="287" name="creat_date">
       <Position>4</Position>
       <Comment>建立日期</Comment>
-      <DataType>varchar(50)|0s</DataType>
+      <DataType>timestamp|0s</DataType>
+      <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
     </column>
     <column id="311" parent="287" name="update_date">
       <Position>5</Position>

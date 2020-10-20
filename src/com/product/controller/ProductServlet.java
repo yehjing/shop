@@ -10,6 +10,7 @@ import javax.servlet.http.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Timestamp;
 import java.util.HashMap;
 
 //@WebServlet(name = "ProductServlet",urlPatterns = {"/list"})
@@ -38,8 +39,9 @@ public class ProductServlet extends HttpServlet {
         ProductVo vo = JSON.parseObject(String.valueOf(sb), ProductVo.class);
         String name = vo.getName(); // 取得請求參數
         Integer price = vo.getPrice(); // 取得請求參數
-        String date = vo.getCreat_date(); // 取得請求參數
+        Timestamp date = vo.getCreat_date(); // 取得請求參數
         String imgPath = vo.getImg_path(); // 取得請求參數
+        String description = vo.getDescription(); // 取得請求參數
         System.out.println("date=> " + date + "name=> " + name + "price=> " + price);
 //        Integer price = null;
 
@@ -75,7 +77,11 @@ public class ProductServlet extends HttpServlet {
             errorMsgs.put("name", "產品名稱必須大於2個字");
         }
 
-
+        //description
+        if(description == null || description.trim().isEmpty()){
+            errorMsgs.put("description", "產品描述不應為空");
+        }
+/* 先拿掉 date
         // date
         String dateReg = "([0-9]{4})[/]{1}([0-9]{1,2})[/]{1}([0-9]{1,2})$";
         String[] valArr = date.split("/");
@@ -88,11 +94,13 @@ public class ProductServlet extends HttpServlet {
         } else if (Integer.parseInt(valArr[2]) < 1 || Integer.parseInt(valArr[2]) > 31) {
             errorMsgs.put("date", "日期區間錯誤");
         }
+*/
         JSONObject resJsonObject = new JSONObject();
         HashMap<String, Object> data = new HashMap();  // 封裝到 Map 裡
         data.put("name", name);
         data.put("price", price);
         data.put("date", date);
+        data.put("description", description);
 
 
 //        req.setAttribute("data", data);         // 設定請求屬性

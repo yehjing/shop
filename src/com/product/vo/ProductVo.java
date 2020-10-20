@@ -1,21 +1,14 @@
 package com.product.vo;
 
+import java.sql.Timestamp;
+
 public class ProductVo {
     private Integer id;
     private String name;
     private Integer price;
-    private String creat_date;
+    private Timestamp creat_date;
     private String update_date;
     private String img_path;
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     private String description;
 
     public Integer getId() {
@@ -42,11 +35,11 @@ public class ProductVo {
         this.price = price;
     }
 
-    public String getCreat_date() {
+    public Timestamp getCreat_date() {
         return creat_date;
     }
 
-    public void setCreat_date(String creat_date) {
+    public void setCreat_date(Timestamp creat_date) {
         this.creat_date = creat_date;
     }
 
@@ -65,4 +58,14 @@ public class ProductVo {
     public void setImg_path(String img_path) {
         this.img_path = img_path;
     }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+
 }
