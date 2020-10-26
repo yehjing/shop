@@ -11,22 +11,26 @@
     <title>產品列表</title>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"
             integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="./style/list.css">
+    <link rel="stylesheet" href="./style/list.css?v=2">
+<%--    <style>--%>
+<%--        .list{--%>
+<%--            width: 100%;--%>
+<%--        }--%>
+<%--    </style>--%>
 </head>
 <body>
 <%@ include file="/nav.jsp"%>
-<div>
+<div id="listContent">
     <ul class="productUl">
     </ul>
 </div>
 
 <script>
-    {
         $(document).ready(function () {
             getInitData()
         })
 
-        let getInitData = function () {
+        function getInitData () {
             $.ajax({
                 type: "post",//傳送方式
                 url: "<%=request.getContextPath()%>/ProductResultServlet",// 路徑
@@ -34,7 +38,7 @@
                 // data : {},
                 success: function (res) {
                     let {result = []} = JSON.parse(res).data
-                    // $(".productUl").children().remove();
+                    $(".productUl").children().remove();
                     result.forEach(function (item) {
                         let htmlTemplate = `
                                     <li data-id="${'${item.id}'}">
@@ -59,7 +63,7 @@
                 }
             })
         }
-        let del = function (id) {
+        function del (id) {
             $.ajax({
                 type: "get",//傳送方式
                 url: "<%=request.getContextPath()%>/ProductDeleteServlet?id=" + id,// 路徑
@@ -75,17 +79,16 @@
                 }
             })
         }
-        let hideText = () => {
-        let len = 50
-        $(".description").each(function (i) {
-            if ($(this).text().length > len) {
-                $(this).attr("title", $(this).text())
-                var text = $(this).text().substring(0, len - 1) + "..."
-                $(this).text(text)
-            }
-        })
-    }
-    }
+        function hideText () {
+            let len = 50
+            $(".description").each(function (i) {
+                if ($(this).text().length > len) {
+                    $(this).attr("title", $(this).text())
+                    let text = $(this).text().substring(0, len - 1) + "..."
+                    $(this).text(text)
+                }
+            })
+        }
 
 </script>
 </body>

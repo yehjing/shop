@@ -26,6 +26,10 @@ public class ProductResultServlet extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
         res.setContentType("text/plain; charset=UTF-8");
 
+        if (req.getHeader("x-forwarded-for") == null) {
+            System.out.println("a => " + req.getRemoteAddr());
+        }
+        System.out.println("b => " + req.getHeader("x-forwarded-for"));
 
         ProductService service = new ProductService();
         ArrayList<ProductVo> result =  service.getAllProduct();
